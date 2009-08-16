@@ -5,11 +5,9 @@ class mysql {
   if $mysql_root_password { 
         
         exec { "Set MySQL server root password":
-          subscribe => [ Package["mysql-server"], Package["mysql-client"] ],
-          refreshonly => true,
-          unless => "mysqladmin -uroot -p$password status",
+          unless => "mysqladmin -uroot -p$mysql_root_password status",
           path => "/bin:/usr/bin",
-          command => "mysqladmin -uroot password $password",
+          command => "mysqladmin -uroot password $mysql_root_password",
           require => [ Package["mysql-server"], Package["mysql-client"] ]
         }
     }
