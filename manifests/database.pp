@@ -21,9 +21,9 @@ define mysql::database($ensure) {
     }
 }
 
-define mysql::user($password) {
-  exec { "Mysql: create $name user":
-                  command = "/usr/bin/echo 'CREATE USER \'${name}\'@\'localhost\' IDENTIFIED BY \'${password}\'; 
-                  GRANT ALL PRIVILEGES ON *.* TO \'monty\'@\'localhost\' WITH GRANT OPTION;"}
-                  onlyif => 
-}
+# define mysql::user($password) {
+#   exec { "Mysql: create $name user":
+#                   command = "/usr/bin/echo 'CREATE USER \'${name}\'@\'localhost\' IDENTIFIED BY \'${password}\'; 
+#                   GRANT ALL PRIVILEGES ON *.* TO \'monty\'@\'localhost\' WITH GRANT OPTION;"}
+#                   onlyif => 
+# }
