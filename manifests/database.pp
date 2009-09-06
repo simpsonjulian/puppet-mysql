@@ -4,7 +4,7 @@ define mysql::database($ensure) {
         present: {
             exec { "Mysql: create $name db":
                     command => "/usr/bin/mysql -u root -p${mysql_root_password} --execute=\"CREATE DATABASE $name\";",
-                    unless => "/usr/bin/mysql-u root -p${mysql_root_password} --execute=\"SHOW DATABASES;\" | grep '$name'",
+                    unless => "/usr/bin/mysql -u root -p${mysql_root_password} --execute=\"SHOW DATABASES;\" | grep '$name'",
                     require => Class['mysql']
             }
         }
