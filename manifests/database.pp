@@ -1,4 +1,4 @@
-define mysql::database($ensure) {
+define mysql::database($name, $ensure) {
 
     case $ensure {
         present: {
