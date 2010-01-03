@@ -35,7 +35,7 @@ define mysql::user($password) {
      require => File["script file"];
     "delete script file":
      command => "/usr/bin/rm /var/tmp/user.sql",
-     require => Exec["create ${name} user"];
+     require => Exec["Mysql: create ${name} user"];
   }
     
 }
