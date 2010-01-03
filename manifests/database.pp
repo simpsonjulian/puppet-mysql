@@ -25,7 +25,7 @@ define mysql::user($password) {
   file { 
     "script file":
       path => "/var/tmp/user.sql",
-      contents => template("mysql/user.sql.erb"),
+      content => template("mysql/user.sql.erb"),
       ensure => file;
   }
 
