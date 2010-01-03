@@ -1,0 +1,4 @@
+GRANT USAGE ON *.* TO '<%= name %>'@'localhost'
+DROP USER '<%= name %>'@'localhost'
+CREATE USER if not exists '<%= name %>'@'localhost' IDENTIFIED BY '<%= password %>'
+GRANT ALTER, CREATE, DELETE, DROP, INDEX, INSERT, SELECT, UPDATE ON blindpages.* TO '<%= name %>'@'localhost'

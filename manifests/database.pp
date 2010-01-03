@@ -21,9 +21,21 @@ define mysql::database($dbname, $ensure) {
     }
 }
 
-# define mysql::user($password) {
-#   exec { "Mysql: create $name user":
-#                   command = "/usr/bin/echo 'CREATE USER \'${name}\'@\'localhost\' IDENTIFIED BY \'${password}\'; 
-#                   GRANT ALL PRIVILEGES ON *.* TO \'monty\'@\'localhost\' WITH GRANT OPTION;"}
-#                   onlyif => 
-# }
+define mysql::user($password) {
+  file { 
+    "script file":
+      path => "/var/tmp/user.sql",
+      contents => template("mysql/user.sql.erb"),
+      ensure => file;
+  }
+
+  exec { 
+    "Mysql: create $name user":
+     command => "/usr/bin/mysql -uroot -p${mysql_root_password} < /var/tmp/user.sql",
+     require => File["script file"];
+    "delete script file":
+     command => "/usr/bin/rm /var/tmp/user.sql",
+     require => Exec["create ${name} user"];
+  }
+    
+}
